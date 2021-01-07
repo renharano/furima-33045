@@ -1,24 +1,64 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| family_name        | string | null: false               |
+| first_name         | string | null: false               |
+| family_name_kana   | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birth_day          | date   | null: false               |
 
-* Ruby version
+### Association
+- has_many :products dependent: :destroy
+- has_many :orders dependent: :destroy
 
-* System dependencies
+## destinationテーブル
 
-* Configuration
+| Column           | Type    | Options                         |
+| ---------------- | ------- | ------------------------------- |
+| post_code        | string  | null: false                     |
+| prefecture_id    | integer | null: false                     |
+| city             | string  | nill: false                     |
+| address          | string  | null: false                     |
+| building_name    | string  | ------------------------------- |
+| phone_number     | string  | null: false                     |
+| order_id         | integer | null: false , foreign_key: true |
 
-* Database creation
+### Association
+- belongs_to: order
 
-* Database initialization
+## orderテーブル
 
-* How to run the test suite
+| Column      | Type    | Options                        |
+| ----------- | ------- | ------------------------------ |
+| user_id     | integer | null: false, foreign_key: true |
+| product_id  | integer | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
+- belongs_to :user dependent: :destroy
+- belongs_to :product
+- has_one :destination
 
-* Deployment instructions
 
-* ...
+## productテーブル
+
+| Column        | Type    | Options                        |
+| ------------- | ------- | ------------------------------ |
+| name          | string  | null: false                    |
+| price         | integer | null: false                    |
+| description   | text    | null: false                    |
+| status_id     | integer | null: false                    |
+| size_id       | integer | null: false                    |
+| shipping_id   |	integer |	null: false                    |
+| judgment_id   | integer | ------------------------------ |
+| shipping_id   |	integer |	null: false, foreign_key: true |
+| user_id       |	integer	| null: false, foreign_key: true |
+
+### Association
+- belongs_to :user dependent: :destroy
+- has_one :order
