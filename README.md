@@ -2,36 +2,36 @@
 
 ## users テーブル
 
-| Column             | Type   | Options                       |
-| ------------------ | ------ | ----------------------------- |
-| nickname           | string | null: false                   |
-| email              | string | null: false, foreign_key: true|
-| encrypted_password | string | null: false                   |
-| family_name        | string | null: false                   |
-| first_name         | string | null: false                   |
-| family_name_kana   | string | null: false                   |
-| first_name_kana    | string | null: false                   |
-| birth_day          | date   | null: false                   |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| family_name        | string | null: false               |
+| first_name         | string | null: false               |
+| family_name_kana   | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birth_day          | date   | null: false               |
 
 ### Association
 - has_many :products dependent: :destroy
-- belongs_to :oder dependent: :destroy
+- has_many :orders dependent: :destroy
 
 ## destinationテーブル
 
 | Column           | Type    | Options                        |
 | ---------------- | ------- | ------------------------------ |
 | post_code        | string  | null: false                    |
-| prefecture       |string   |null: false                     |
-| city             |string   | nill: false                    |
+| prefecture_id    | integer |null: false                     |
+| city             | string  | nill: false                    |
 | address          | string  | null: false                    |
 | building_name    | string  | ------------------------------ |
 | phone_number     | string  | null: false                    |
 
 ### Association
-- belongs_to :product dependent: :destroy
+- belongs_to :order
 
-## oderテーブル
+## orderテーブル
 
 | Column      | Type    | Options                        |
 | ----------- | ------- | ------------------------------ |
@@ -40,6 +40,7 @@
 
 ### Association
 - belongs_to :user dependent: :destroy
+- belongs_to :product
 
 
 ## productテーブル
