@@ -19,18 +19,18 @@
 
 ## destinationテーブル
 
-| Column           | Type    | Options                        |
-| ---------------- | ------- | ------------------------------ |
-| post_code        | string  | null: false                    |
-| prefecture_id    | integer | null: false                    |
-| city             | string  | nill: false                    |
-| address          | string  | null: false                    |
-| building_name    | string  | ------------------------------ |
-| phone_number     | string  | null: false                    |
-| information_id   | integer | null: false                    |
+| Column           | Type    | Options                         |
+| ---------------- | ------- | ------------------------------- |
+| post_code        | string  | null: false                     |
+| prefecture_id    | integer | null: false                     |
+| city             | string  | nill: false                     |
+| address          | string  | null: false                     |
+| building_name    | string  | ------------------------------- |
+| phone_number     | string  | null: false                     |
+| order_id         | integer | null: false , foreign_key: true |
 
 ### Association
-- belongs_to :order 
+- has_one :order 
 
 ## orderテーブル
 
