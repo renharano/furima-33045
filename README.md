@@ -30,7 +30,7 @@
 | order_id         | integer | null: false , foreign_key: true |
 
 ### Association
-- has_one :order 
+- belongs_to: order
 
 ## orderテーブル
 
@@ -41,7 +41,8 @@
 
 ### Association
 - belongs_to :user dependent: :destroy
-- has_one :product
+- belongs_to :product
+- has_one :destination
 
 
 ## productテーブル
