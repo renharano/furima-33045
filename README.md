@@ -22,14 +22,15 @@
 | Column           | Type    | Options                        |
 | ---------------- | ------- | ------------------------------ |
 | post_code        | string  | null: false                    |
-| prefecture_id    | integer |null: false                     |
+| prefecture_id    | integer | null: false                    |
 | city             | string  | nill: false                    |
 | address          | string  | null: false                    |
 | building_name    | string  | ------------------------------ |
 | phone_number     | string  | null: false                    |
+| information_id   | integer | null: false                    |
 
 ### Association
-- belongs_to :order
+- belongs_to :order 
 
 ## orderテーブル
 
@@ -50,9 +51,9 @@
 | name          | string  | null: false                    |
 | price         | integer | null: false                    |
 | description   | text    | null: false                    |
-| status_id     | string  | null: false                    |
-| size_id       | string  | null: false                    |
-| shipping_id   |	string  |	null: false                    |
+| status_id     | integer | null: false                    |
+| size_id       | integer | null: false                    |
+| shipping_id   |	integer |	null: false                    |
 | judgment_id   | integer | ------------------------------ |
 | shipping_id   |	integer |	null: false, foreign_key: true |
 | user_id       |	integer	| null: false, foreign_key: true |
