@@ -41,7 +41,7 @@
 
 ### Association
 - belongs_to :user dependent: :destroy
-- belongs_to :product
+- has_one :product
 
 
 ## productテーブル
