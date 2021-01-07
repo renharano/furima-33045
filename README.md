@@ -15,7 +15,6 @@
 
 ### Association
 - has_many :products dependent: :destroy
-- belongs_to :destination dependent: :destroy
 - belongs_to :card dependent: :destroy
 
 ## destinationテーブル
@@ -28,17 +27,17 @@
 | city             |string   | nill: false                    |
 | address          | string  | null: false                    |
 | building_name    | string  | ------------------------------ |
-| phone_number     | string  | ------------------------------ |
+| phone_number     | string  | null: false                    |
 
 ### Association
-- belongs_to :user
+- belongs_to :product
 
 ## cardテーブル
 
 | Column      | Type    | Options                        |
 | ----------- | ------- | ------------------------------ |
 | user_id     | integer | null: false, foreign_key: true |
-| item_id     | integer | null: false, foreign_key: true |
+| product_id  | integer | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -52,16 +51,12 @@
 | description   | text    | null: false                    |
 | status        | string  | null: false                    |
 | size          | string  | null: false                    |
-| shipping_cost |  string | null: false                    |
+| shipping_cost | string  | null: false                    |
 | shipping_days |	string  |	null: false                    |
-| judgment	    |string	  | ------------------------------ |
+| judgment_id   | integer | ------------------------------ |
 | shipping_id   |	integer |	null: false, foreign_key: true |
 | user_id       |	integer	| null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user dependent: :destroy
-- belongs_to :category dependent: :destroy
-- belongs_to :brand dependent: :destroy
-- has_many :images dependent: :destroy
-
-- belongs_to_active_hash :prefecture
+- belongs_to :destination dependent: :destroy
