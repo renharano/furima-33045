@@ -50,17 +50,42 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Day must be other than 1")
       end
       it 'priceが空では登録できない' do
-        @item.price = 1
+        @item.price = ""
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '価格の範囲が¥300~¥9999999の間でなければ登録できない' do
         @item.price = "10"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
+      it '販売価格が299円のときは登録できない'do
+      @item.price = "299"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+      end
+      it '販売価格が9999999円のときは登録できない'do
+      @item.price = "9999999"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+      end
       it '販売価格が半角数字意外であれば登録できない' do
         @item.price = "３００"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it '販売価格は全角文字では登録できないこと' do
+        @item.price = "３００"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it '販売価格は半角英数混合では登録できないこと' do
+        @item.price = "aa11"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it '販売価格は半角英語だけでは登録できないこと' do
+        @item.price = "aaa"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
