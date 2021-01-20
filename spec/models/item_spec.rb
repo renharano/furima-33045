@@ -6,93 +6,63 @@ RSpec.describe Item, type: :model do
   end
 
 
-  describe "ユーザー新規登録" do
     context '新規登録できるとき' do
-      it 'imageが存在すれば登録できる' do
-        expect(@item).to be_valid
-      end
-      it 'nameが存在すれば登録できる' do
-        expect(@item).to be_valid
-      end
-      it 'textが存在すれば登録できる' do
-        expect(@item).to be_valid
-      end
-      it 'categoryが存在すれば登録できる' do
-        expect(@item).to be_valid
-      end
-      it 'statusが存在すれば登録できる' do
-        expect(@item).to be_valid
-      end
-      it 'judgmentが存在すれば登録できる' do
-        expect(@item).to be_valid
-      end
-      it 'prefectureが存在すれば登録できる' do
-        expect(@item).to be_valid
-      end
-      it 'dayが存在すれば登録できる' do
-        expect(@item).to be_valid
-      end
-      it 'priceが存在すれば登録できる' do
+      it '全て入力されていれば登録できる' do
         expect(@item).to be_valid
       end
     end
-  end
+  
   
   context '新規登録できない時' do
-      it 'imageが空では登録できない' do
-        @item.image = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
-      end
-      it 'nameが空では登録できない' do
-        @item.name = nil
+      it 'nameがない場合は登録できない' do
+        @item.name = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
       it 'textが空では登録できない' do
-        @item.text = nil
+        @item.text = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Text can't be blank")
       end
-      it 'categoryが空では登録できない' do
-        @item.category = nil
+      it 'categoryが1では登録できない' do
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
-      it 'statusが空では登録できない' do
-        @item.status = nil
+      it 'statusが1では登録できない' do
+        @item.status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank")
+        expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
-      it 'judgmnetが空では登録できない' do
-        @item.judgment = nil
+      it 'judgmnetが1では登録できない' do
+        @item.judgment_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Judgment can't be blank")
+        expect(@item.errors.full_messages).to include("Judgment must be other than 1")
       end
-      it 'prefectureが空では登録できない' do
-        @item.prefecture = nil
+      it 'prefectureが1では登録できない' do
+        @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
-      it 'dayが空では登録できない' do
-        @item.day = nil
+      it 'dayが1では登録できない' do
+        @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Day can't be blank")
+        expect(@item.errors.full_messages).to include("Day must be other than 1")
       end
       it 'priceが空では登録できない' do
-        @item.price = nil
+        @item.price = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
       it '価格の範囲が¥300~¥9999999の間でなければ登録できない' do
         @item.price = "10"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Judgment can't be blank")
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
       it '販売価格が半角数字意外であれば登録できない' do
         @item.price = "３００"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Judgment can't be blank")
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
-   end
+  end
 end
