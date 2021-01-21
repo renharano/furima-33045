@@ -14,10 +14,29 @@
 | birth_day          | date   | null: false               |
 
 ### Association
-- has_many :products dependent: :destroy
+- has_many :items, dependent: :destroy
 - has_many :orders dependent: :destroy
 
-## destinationテーブル
+
+## itemsテーブル
+
+| Column        | Type      | Options                        |
+| ------------- | --------- | ------------------------------ |
+| name          | string    | null: false                    |
+| price         | integer   | null: false                    |
+| category_id   | integer   | null: false                    |
+| status_id     | integer   | null: false                    |
+| text          | text      | null: false                    |
+| day_id        |	integer   |	null: false                    |
+| judgment_id   | integer   | null: false                    |
+| prefecture_id |	integer   |	null: false,                   |
+| user          |	reference	| null: false, foreign_key: true |
+
+### Association
+- belongs_to :user 
+- has_one :oder
+
+## destination テーブル
 
 | Column           | Type    | Options                         |
 | ---------------- | ------- | ------------------------------- |
@@ -27,38 +46,18 @@
 | address          | string  | null: false                     |
 | building_name    | string  | ------------------------------- |
 | phone_number     | string  | null: false                     |
-| order_id         | integer | null: false , foreign_key: true |
+| order            | integer | null: false , foreign_key: true |
 
 ### Association
-- belongs_to: order
+- belongs_to :order 
 
 ## orderテーブル
-
-| Column      | Type    | Options                        |
-| ----------- | ------- | ------------------------------ |
-| user_id     | integer | null: false, foreign_key: true |
-| product_id  | integer | null: false, foreign_key: true |
-
-### Association
-- belongs_to :user dependent: :destroy
-- belongs_to :product
-- has_one :destination
-
-
-## productテーブル
-
-| Column        | Type    | Options                        |
-| ------------- | ------- | ------------------------------ |
-| name          | string  | null: false                    |
-| price         | integer | null: false                    |
-| description   | text    | null: false                    |
-| status_id     | integer | null: false                    |
-| size_id       | integer | null: false                    |
-| shipping_id   |	integer |	null: false                    |
-| judgment_id   | integer | ------------------------------ |
-| shipping_id   |	integer |	null: false, foreign_key: true |
-| user_id       |	integer	| null: false, foreign_key: true |
+| Column | Type      | Options                        |
+| ------ | --------- | ------------------------------ |
+| item   | reference | null: false, foreign_key: true |
+| user   | reference | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user dependent: :destroy
-- has_one :order
+- belongs_to :item
+- belongs_to :user
+- belongs_to :address
