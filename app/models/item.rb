@@ -8,16 +8,19 @@ class Item < ApplicationRecord
   belongs_to :judgment
   belongs_to :prefecture
   belongs_to :status
+
   with_options presence: true do
     validates :name
     validates :text
     validates :price, format: { with: /\A[a-zA-Z0-9]+\z/ }, inclusion: {in: 300..9999999}
     validates :image
   end
-  
-  validates :category_id, numericality: { other_than: 1 }
-  validates :status_id, numericality: { other_than: 1 }
-  validates :prefecture_id, numericality: { other_than: 1 }
-  validates :day_id, numericality: { other_than: 1 }
-  validates :judgment_id, numericality: { other_than: 1 }
+
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :status_id
+    validates :prefecture_id
+    validates :day_id
+    validates :judgment_id
+  end
 end
