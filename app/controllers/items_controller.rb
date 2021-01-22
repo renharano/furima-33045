@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user! , only: :new
+  
   def index 
     @items = Item.all.order("created_at DESC")
   end
@@ -13,8 +14,13 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      render :new
-    end
+    render :new
+  end
+
+  def show
+    @item = Item.find(params[:id])
+  end
+
   end
 
   private
