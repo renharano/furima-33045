@@ -18,4 +18,6 @@ class User < ApplicationRecord
     validates :last_name_kana, format: { with: VALID_KATAKANA_REGEX}
     validates :birth_day
   end
+
+  has_many :items
 end
