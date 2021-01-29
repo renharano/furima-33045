@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
 
      private
      def contributor_confirmation
-       redirect_to root_path if current_user.id == @item.user.id
+       redirect_to root_path if current_user.id == @item.user.id || @item.order
      end
 
      def set_order
