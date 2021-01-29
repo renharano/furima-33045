@@ -1,14 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :item_params#, only: [:index, :create]
+  before_action :set_order
   before_action :contributor_confirmation, only: [:index]
   
   
   def index
     @useraddress = Useraddress.new
-  end
-  
-  def new
   end
 
   def create
@@ -16,7 +13,7 @@ class OrdersController < ApplicationController
     if @useraddress.valid?
        pay_item
        @useraddress.save
-       redirect_to action: :index
+       redirect_to root_path
     else
        render action: :index
     end
@@ -24,15 +21,15 @@ class OrdersController < ApplicationController
 
      private
      def contributor_confirmation
-       redirect_to root_path if current_user.id == @item.user.id || @item.order
+       redirect_to root_path if current_user.id == @item.user.id
      end
 
-     def item_params
+     def set_order
       @item = Item.find(params[:item_id])
      end
 
     def order_params
-      params.require(:useraddress).permit(:post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id]).merge(token: params[:token])
+      params.require(:useraddress).permit(:post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
     end
   
     def pay_item

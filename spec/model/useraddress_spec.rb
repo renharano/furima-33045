@@ -69,7 +69,7 @@ RSpec.describe Useraddress, type: :model do
       expect(@order.errors.full_messages).to include("Phone number can't be blank")
     end
     it "電話番号に英数字がある場合は登録できないとき" do
-      @order.phone_number = "0123abc456789"
+      @order.phone_number = "0123abc45"
       @order.valid?
       
       expect(@order.errors.full_messages).to include("Phone number can't be blank")
