@@ -25,7 +25,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @order =  useraddress.new
+    if @item.history
+    redirect_to root_path
+    end
   end
+  
 
   def update
     if @item.update(item_params)
