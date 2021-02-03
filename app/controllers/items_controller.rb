@@ -25,14 +25,16 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.order
+    if @item.valid? 
+      @item.order
     redirect_to root_path
     end
   end
   
 
   def update
-    if @item.update(item_params)
+    if @item.valid?
+      @item.update(item_params)
       redirect_to root_path
     else
       render :edit
@@ -40,7 +42,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.destroy
+    if @item.valid?
+      @item.destroy
       redirect_to root_path
     else
       render :index
